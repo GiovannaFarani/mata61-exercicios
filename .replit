@@ -1,0 +1,29 @@
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["flex", "gcc"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Build E1"
+
+[[workflows.workflow]]
+name = "Build E1"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd E1 && make compile && echo 'Build successful. Run ./E1/e1 to use the lexer.'"
+
+[workflows.workflow.metadata]
+outputType = "console"
